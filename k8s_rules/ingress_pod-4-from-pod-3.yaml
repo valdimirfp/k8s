@@ -1,0 +1,19 @@
+# ---
+# allow ingres to pod-4 from pod-3
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ing-pod-4-from-pod-3
+  namespace: websrv
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-4
+#  policyTypes:
+#  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          tsrv: testsrv
+

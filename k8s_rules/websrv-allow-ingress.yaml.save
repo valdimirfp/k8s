@@ -1,0 +1,32 @@
+# ---
+# allow ingres to websrv from default
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: websrv-allow-all-ingress
+  namespace: websrv
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-4
+policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          ns: websrv
+
+
+
+#apiVersion: networking.k8s.io/v1
+#kind: NetworkPolicy
+#metadata:
+#  name: websrv-allow-all-ingress
+#  namespace: websrv
+#spec:
+#  podSelector: {}
+#  ingress:
+#  - {}
+#  policyTypes:
+#  - Ingress

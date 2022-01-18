@@ -1,0 +1,18 @@
+# ---
+# egress rull pod-2 ---> pod-1
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: egress-pod-2
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-2
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          run: pod-1

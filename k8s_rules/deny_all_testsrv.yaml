@@ -1,0 +1,12 @@
+# ---
+# deny all testsrv netpolicy
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-all-testsrv
+  namespace: testsrv
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress

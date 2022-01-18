@@ -1,0 +1,18 @@
+# ---
+# ingress rull pod-1 ---> pod-2
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-pod-1
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-1
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          run: pod-2

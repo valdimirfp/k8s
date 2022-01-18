@@ -1,0 +1,19 @@
+# ---
+# allow egress from pod-3 to pod-4
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: pod-3-to-pod-4-egress
+  namespace: testsrv
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-3
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          wsrv: websrv
+     

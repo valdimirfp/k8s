@@ -1,0 +1,38 @@
+# ---
+# egress rull pod-4 ---> pod-2 
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: pod-4-pod-2-ns-egress
+  namespace: websrv
+spec:
+  podSelector:
+    matchLabels:
+      run: pod-4
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          ns: default
+
+
+
+
+#apiVersion: networking.k8s.io/v1
+#kind: NetworkPolicy
+#metadata:
+#  name: egress-pod-4
+#  namespace: websrv
+#spec:
+#  podSelector:
+#    matchLabels:
+#      run: pod-4
+#  policyTypes:
+#  - Egress
+#  egress:
+#  - to:
+#    - podSelector:
+#        matchLabels:
+#          run: pod-2
